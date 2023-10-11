@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/**
+ * Entao aqui no começo vamos testar a rota se chega tudo certinho
+ */
+Route::get('/', 'Panel\LoginController@index')->name('panel.login');
+Route::post('/', 'Panel\LoginController@auth')->name('auth.login');
 
 
 

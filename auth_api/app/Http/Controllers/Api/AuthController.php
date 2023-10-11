@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -23,6 +24,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required|min:4'
+        ];
+   
+        $fb = [
+            'email.required' => 'O campo é obrigátorio',
+            'email.email' => 'O campo deve ser preenchido com um email válido'
+        ];
+   
+        $request->validate($rules, $fb);
+        
         $credentials = $request->only(['email', 'password']);      
     
         if (!JWTAuth::attempt($credentials)) {
@@ -33,5 +46,6 @@ class AuthController extends Controller
         return response()->json(['token' => $token]);
     }
 
+    
 }
    

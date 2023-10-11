@@ -21,6 +21,6 @@ Route::group([
 
 ], function () {
 
-    Route::post('login', 'AuthController@login')->name('api.login');
+    Route::post('login', 'Api\AuthController@login')->name('api.login');
 });
 
